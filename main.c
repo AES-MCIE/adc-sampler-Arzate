@@ -15,7 +15,7 @@
  *	-[x] Imprime el valor maximo
  *	-[x] Imprime el valor Medio
  *	-[x] Imprime la mediana
- *	-[] Histrograma
+ *	-[] Histograma
  *	-[] Valor RMS
  *	*/
 
