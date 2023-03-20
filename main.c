@@ -34,19 +34,13 @@ int main(int argc, char* argv[]){
 	char reads[80];		//Se guarda lo que se lea 
 	//fgets(reads,20,fp);		//Lee lo que esta en el puntero y guarda en reads
 	//printf("%s", reads);
-	int aux = 0;
-	int i, j = 0 ;
+	int i, j, aux =  0 ;
 	int n = (int)strtol(argv[1],NULL,10);
-	int  arreglo[n];
-	float sum = 0.00;
-	float vmedia = 0.00;
-	int vmax;
-	int vmin;
-	float med = 0.00;
-	float vmedian  = 0.00;
-	float suma = 0.00;
-	float cuad = 0.00;
-	int maux[n];
+	int  arreglo[n], maux[n];
+	float sum, vmedia, med, vmedian, suma, cuad = 0.00;
+	int vmax, vmin;
+
+
 	if(argc!=2){
 		printf("Argumentos: %d \n", argc);
 		printf("Comando usado: adc-meas n \n");
