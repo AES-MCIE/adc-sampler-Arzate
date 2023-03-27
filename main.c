@@ -39,7 +39,8 @@ int main(int argc, char* argv[]){
 		printf("* Mediana \n");
 		printf("* Valor RMS \n \n");
 		printf("Los resultados anteriores se obtienen convirtiendo el valor medido en el ADC a voltaje. \n");
-		printf("Para la conversión se utilizan rangos de 0 a 4095 para el ADC y  0 a 1.8 para el voltaje. \n \n");
+		printf("Para la conversión se utilizan rangos de 0 a 4095 para el ADC y  0 a 1.8 para el voltaje. Los rangos se obtienen de las propiedades \n");
+		printf("del ADC, el cual tiene 12 bits de resolución y un rango de voltaje de 0 a 1.8 volts \n \n");
 		printf("Por último, se realiza un histograma con los datos especificando sus rangos en los valores obtenidos en el ADC. \n");
 		printf("------------------------------------------------------------------------------------------------------------------------------- \n");
 		return 0;
