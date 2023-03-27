@@ -6,16 +6,17 @@ Implemente el siguiente registrador de datos para el ADC usando C para programar
 
 ## Acondicionamiento de la señal
 
-Para realizar una correcta lectura en el ADC0 de la BeagleBone Black o para cualquier otro de los 6 canales se debe tener en cuenta que los ADCs tienen un rango de medición de 0 a 1.8 Volts, conectar un voltaje superior a este puede dañar la placa.
+
+Para realizar una correcta lectura en el ADC0 de la BeagleBone Black o para cualquier otro de los 6 canales restantes se debe tener en cuenta que los ADCs tienen un rango de medición de 0 a 1.8 Volts, conectar un voltaje superior a este puede dañar la placa.
 
 
-En el acondicionamiento de la señal se utilizó un generador para obtener una señal senoidal de 3 Vpp la cual se redujo a la mitad mediante el uso de un amplificador inversor aplicando la formula:
+En el acondicionamiento de la señal se utilizó un generador para obtener una señal senoidal de 3 Vpp, con un amplificador inversor con resistencias de 1k ohms y 2k ohms se redujo a la mitad la amplitud de la señal, con un segundo amplificador inversor con resistencias de igual tamaño se invierte nuevamente la señal para corregir él desface generado con el primer amplificador, y  por último, se utiliza una fuente de voltaje de CD con dos resistencias para sumar 1 V y obtener un valor mínimo superior a 0 V (Desplazar el offset al voltaje positivo).
 
+![](./amplificador.jpeg)
 ![](./formula_inversor.png)
 
-Con un segundo amplificador inversor con resistencias de igual valor se invirtió el voltaje y por último se suma una señal de 1 V para obtener el voltaje mínimo superior a 0.
-
 El circuito resultante se muestra a continuación.
+![](./circuitof.jpeg)
 
 ## Conexiones 
 
@@ -24,17 +25,21 @@ El circuito resultante se muestra a continuación.
 
 En la imagen anterior se muestra la conexión del circuito presentado en la sección anterior con la BeagleBone, se puede observar que en la placa se utilizan los pines `AIN0` y `GND_ADC`, este último siempre se debe conectar a la tierra de una fuente de voltaje para medir un voltaje positivo.
 
-Para a implementación del esquemático se configuró una señal senoidal de 1.3 Vpp a 100 Hz. 
+Para la implementación del esquemático se configuró una señal de entrada senoidal de 3 Vpp a 100 Hz. 
 
 ![](./generador.jpeg)
 
-Se realizaron las conexiones en una protoboard como se muestra a continuación. 
+![](./entrada.jpeg)
+
+Y se realizaron las conexiones en una protoboard como se muestra a continuación. 
 
 ![](/armado.jpeg)
 
 **Nota: En la protoboard se muestran tres circuitos diferentes, el utilizado en este caso es el armado en el centro.**
 
+
 ## Programa
+
 Para compilar el programa es necesario ejecutar el comando: 
 ```
 gcc main.c -o adc-meas -lm
@@ -47,7 +52,7 @@ El programa recibe un argumento donde se especifica el número de lecturas del A
 ```
 ./adc-meas num
 ```
-El número debe ser un valor entre `500` y `1000` o bien se puede utilizar el comando con la palabra `help` en sustitución del valor para consultar el menú de ayuda.
+El número `num`  debe ser un valor entre `500` y `1000` o bien se puede utilizar el comando con la palabra `help` en sustitución del valor para consultar el menú de ayuda.
 
 A partir de los datos obtenidos se calculan el valor `mínimo`, `máximo`, `medio`, `RMS` y la `mediana`, posterior a ello los datos son mapeados a voltaje y mostrados en la pantalla.
 El ADC cuenta con 12 bits de resolución y un rango de mediciones de `0` a `1.8` Volts, por los cual para hacer el mapeo de los valores se utiliza la siguiente regla de conversión.
@@ -70,3 +75,8 @@ Para graficar el histograma de las mediciones se utilizan `16 rangos` iniciando 
 
 ## Resultados
 
+Para finalizar, se muestra la salida resultante en un osciloscopio y la respuesta ante la ejecución del programa.
+
+![](./Result.jpeg)
+
+![](./Resultados.png)
