@@ -35,7 +35,14 @@ Se realizaron las conexiones en una protoboard como se muestra a continuación.
 **Nota: En la protoboard se muestran tres circuitos diferentes, el utilizado en este caso es el armado en el centro.**
 
 ## Programa
-
+Para compilar el programa es necesario ejecutar el comando: 
+```
+gcc main.c -o adc-meas -lm
+```
+En caso de no tener instalado el compilador `gcc`, para su instalacion , utilice el comando:
+``` 
+sudo apt-get install gcc
+```
 El programa recibe un argumento donde se especifica el número de lecturas del ADC mediante el comando:
 ```
 ./adc-meas num
@@ -60,7 +67,6 @@ Para el valor RMS se toma el cuadrado de cada una de las mediciones, se promedi
 
 ### Histograma
 Para graficar el histograma de las mediciones se utilizan `16 rangos` iniciando en 0 y sumando 250 puntos hasta completar el valor máximo que pueden tomar las mediciones que equivale a 4095, por ello el último rango abarca de 3750 a 4100. Para cada rango se dibuja un asterisco `*` por cada medición dentro del mismo.
-
 
 ## Resultados
 
