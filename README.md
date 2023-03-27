@@ -6,11 +6,10 @@ Implemente el siguiente registrador de datos para el ADC usando C para programar
 
 ## Acondicionamiento de la señal
 
-
 Para realizar una correcta lectura en el ADC0 de la BeagleBone Black o para cualquier otro de los 6 canales restantes se debe tener en cuenta que los ADCs tienen un rango de medición de 0 a 1.8 Volts, conectar un voltaje superior a este puede dañar la placa.
 
 
-En el acondicionamiento de la señal se utilizó un generador para obtener una señal senoidal de 3 Vpp, con un amplificador inversor con resistencias de 1k ohms y 2k ohms se redujo a la mitad la amplitud de la señal, con un segundo amplificador inversor con resistencias de igual tamaño se invierte nuevamente la señal para corregir él desface generado con el primer amplificador, y  por último, se utiliza una fuente de voltaje de CD con dos resistencias para sumar 1 V y obtener un valor mínimo superior a 0 V (Desplazar el offset al voltaje positivo).
+En el acondicionamiento de la señal se utilizó un generador para obtener una señal senoidal de 3 Vpp, con un amplificador inversor con resistencias de 1k ohms y 2k ohms se redujo a la mitad la amplitud de la señal, con un segundo amplificador inversor con resistencias de igual valor se invierte nuevamente la señal para corregir él desface generado con el primer amplificador, y  por último, se utiliza una fuente de voltaje de CD con dos resistencias para sumar 1 V y obtener un valor mínimo superior a 0 V (Desplazar el offset al voltaje positivo).
 
 ![](./amplificador.jpeg)
 ![](./formula_inversor.png)
@@ -20,23 +19,23 @@ El circuito resultante se muestra a continuación.
 
 ## Conexiones 
 
-
-![](./conexion.jpeg)
-
-En la imagen anterior se muestra la conexión del circuito presentado en la sección anterior con la BeagleBone, se puede observar que en la placa se utilizan los pines `AIN0` y `GND_ADC`, este último siempre se debe conectar a la tierra de una fuente de voltaje para medir un voltaje positivo.
-
-Para la implementación del esquemático se configuró una señal de entrada senoidal de 3 Vpp a 100 Hz. 
+Configuración de la señal de entrada senoidal de 3 Vpp a 100 Hz. 
 
 ![](./generador.jpeg)
 
 ![](./entrada.jpeg)
 
-Y se realizaron las conexiones en una protoboard como se muestra a continuación. 
+Conexiones del circuito en una protoboard. 
 
 ![](/armado.jpeg)
 
 **Nota: En la protoboard se muestran tres circuitos diferentes, el utilizado en este caso es el armado en el centro.**
 
+![](./conexion.jpeg)
+
+En la imagen anterior se muestra la conexión del circuito con la BeagleBone, se puede observar que en la placa se utilizan los pines `AIN0` para especificar el ADC0 y `GND_ADC` para la tierra.
+
+**Recomendación: Es importante revisar la salida del circuito en un osciloscopio antes de conectar a la BeagleBone esto para garantizar que el rango de voltaje sea adecuado.**
 
 ## Programa
 
@@ -75,8 +74,10 @@ Para graficar el histograma de las mediciones se utilizan `16 rangos` iniciando 
 
 ## Resultados
 
-Para finalizar, se muestra la salida resultante en un osciloscopio y la respuesta ante la ejecución del programa.
+Para finalizar, se muestra la salida resultante en un osciloscopio donde el valor mínimo es de 600 mV y el máximo de 1.62 V, por lo cual el acondicionamiento de la señal se realizó de manera correcta y con dichos valores ya se puede proceder a conectar la BeagleBone y ejecutar el código.
 
 ![](./Result.jpeg)
+
+La respuesta a la ejecución del programa para muestras de 500 y 1000 valores se dio como se muestra a continuación.
 
 ![](./Resultados.png)
